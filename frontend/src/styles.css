@@ -9,10 +9,16 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
+ * {
+   box-sizing: border-box !important;
+ }
+
  html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
     font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
   }
   
   /* Sections
@@ -23,6 +29,7 @@
    */
   
   body {
+    padding: 0;
     margin: 0;
   }
   
