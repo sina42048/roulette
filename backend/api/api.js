@@ -8,7 +8,14 @@ const helmet = require('helmet');
 const http = require('http');
 const mapRoutes = require('express-routes-mapper');
 const cors = require('cors');
-const socketIo = require('socket.io');
+const io = require('socket.io')(4000, {
+  cors: {
+    origin: 'http://localhost:4200',
+    credentials: true,
+  },
+  serveClient: true,
+});
+const gameLogic = require('../game-logic/roulette');
 
 /**
  * server configuration
@@ -25,7 +32,6 @@ const environment = process.env.NODE_ENV;
  */
 const app = express();
 const server = http.Server(app);
-const io = socketIo(server);
 const mappedOpenRoutes = mapRoutes(config.publicRoutes, 'api/controllers/');
 const mappedAuthRoutes = mapRoutes(config.privateRoutes, 'api/controllers/');
 const DB = dbService(environment, config.migrate).start();
@@ -52,9 +58,14 @@ app.all('/private/*', (req, res, next) => auth(req, res, next));
 app.use('/public', mappedOpenRoutes);
 app.use('/private', mappedAuthRoutes);
 
+gameLogic.startGame(io);
 
-io.on('connection', () => {
-  console.log('User Connected');
+io.on('connection', (socket) => {
+  console.log('User Connnected !');
+  if (gameLogic.getRollTimer <= 0) {
+    socket.emit('timer', 0);
+    socket.emit('rolling', gameLogic.getRolledNumber);
+  }
 });
 
 server.listen(config.port, () => {

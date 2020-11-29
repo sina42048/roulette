@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { interval, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -28,7 +29,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   gameButtonInterval$: Subscription;
   audio: HTMLAudioElement;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.buttonState = 'start';
@@ -42,6 +43,7 @@ export class LandingComponent implements OnInit, OnDestroy {
     this.audio.src = '../../../assets/sound.ogg';
     this.audio.load();
     this.audio.play();
+    this.router.navigate(['/game']);
   }
 
   ngOnDestroy(): void {
