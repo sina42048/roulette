@@ -1,0 +1,29 @@
+.latest-rolls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 1150px;
+    max-width: 1150px;
+    height: 145px;
+    color: white;
+    margin: 0 auto 0 auto;
+}
+
+img {
+    width: 50px;
+    padding: 5px;
+}
+
+p {
+    margin-right: 30px;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .latest-rolls {
+        width: 800px;
+    }
+}

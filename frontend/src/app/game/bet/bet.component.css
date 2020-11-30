@@ -1,0 +1,65 @@
+.bet {
+    position: relative;
+    width: 22rem;
+    height: 200px;
+    overflow: visible;
+}
+
+button {
+    width: 100%;
+    border: none;
+    height: 3rem;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 10px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.bet-image {
+    position: absolute;
+    top: -30px;
+    width: 50px;
+    transform: rotate(-18deg);
+}
+
+.bet-header{
+    transition: .2s cubic-bezier(0.1, 0.1, 0.1, 0.1);
+}
+
+.bet-header:hover {
+    transform: scale(1.1);
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    margin: 20px;
+}
+
+.place-bet-holder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.place-bet-name {
+    font-weight: bolder;
+}
+
+.place-bet-amount {
+    font-size: .6rem;
+}
+
+@media only screen and (max-width: 1200px) {
+    .bet {
+        width: 16rem;
+    }
+}

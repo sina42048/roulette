@@ -1,0 +1,12 @@
+<div class="bet-control">
+    <p>Enter Bet Amount : </p>
+    <input [(ngModel)]="amount" type="number" (input)="onBetAmountChange()" placeholder="Enter Amount ...">
+    <ul>
+        <li (click)="increaseBetAmount(1)">+1</li>
+        <li (click)="increaseBetAmount(5)">+5</li>
+        <li (click)="increaseBetAmount(10)">+10</li>
+        <li (click)="increaseBetAmount(50)">+50</li>
+        <li (click)="increaseBetAmount(100)">+100</li>
+        <li (click)="resetBetAmount()">CLEAR</li>
+    </ul>
+</div>

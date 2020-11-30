@@ -16,10 +16,10 @@ import { Router } from '@angular/router';
         transform: 'rotate(8deg) scale(1.5)',
       })),
       transition('start => end', [
-        animate('500ms 0.2ms linear')
+        animate('200ms linear')
       ]),
       transition('end => start' , [
-        animate('500ms 0.2ms linear')
+        animate('200ms linear')
       ])
     ])
   ]
@@ -33,7 +33,7 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buttonState = 'start';
-    this.gameButtonInterval$ = interval(1000).subscribe(() => {
+    this.gameButtonInterval$ = interval(500).subscribe(() => {
       this.buttonState == 'start' ? this.buttonState = 'end' : this.buttonState = 'start';
     });
   }

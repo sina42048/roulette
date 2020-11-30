@@ -1,0 +1,4 @@
+<div class="latest-rolls">
+    <p>Latest Rolls: </p>
+    <img src="../../../assets/red.png" alt="" @list *ngFor="let roll of rolls" [ngStyle]="{'filter': roll.colorStyle}">
+</div>

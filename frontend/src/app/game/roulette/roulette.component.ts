@@ -32,7 +32,7 @@ export class RouletteComponent implements OnInit {
 
     this.rollObservable$ = this.socketService.fromEvent('roll').subscribe((data: number) => {
       this.audio.play();
-      this.rouletteRoll(data, -12000, 5000);
+      this.rouletteRoll(data, -12000, 9000);
     });
 
     this.rollingObservable$ = this.socketService.fromEvent('rolling').subscribe((data: number) => {
@@ -75,7 +75,7 @@ export class RouletteComponent implements OnInit {
     if ( ( $event.target as any ).innerWidth < 1200 ) {
       this.initialRoulettePosition = -350;
     } else {
-      this.initialRoulettePosition = -176;
+      this.initialRoulettePosition = -175;
     }
   }
 

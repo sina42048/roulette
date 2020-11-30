@@ -16,6 +16,7 @@ const io = require('socket.io')(4000, {
   serveClient: true,
 });
 const gameLogic = require('../game-logic/roulette');
+const betLogic = require('../game-logic/bet');
 
 /**
  * server configuration
@@ -61,11 +62,26 @@ app.use('/private', mappedAuthRoutes);
 gameLogic.startGame(io);
 
 io.on('connection', (socket) => {
-  console.log('User Connnected !');
-  if (gameLogic.getRollTimer <= 0) {
-    socket.emit('timer', 0);
-    socket.emit('rolling', gameLogic.getRolledNumber);
-  }
+  console.log('user connected');
+  socket.on('enteredGame', () => {
+    socket.emit('allBets', betLogic.getAllBets());
+    socket.emit('latestRolls', gameLogic.getLatestRolls());
+    if (gameLogic.getRollTimer() <= 0) {
+      socket.emit('timer', 0);
+      socket.emit('rolling', gameLogic.getRolledNumber());
+    }
+  });
+
+  socket.on('newBet', (data) => {
+    if (gameLogic.getRollTimer() > 0) {
+      betLogic.addNewBet(data.name, data.amount, data.color);
+      io.sockets.emit('newBetAddedToAllUser', data);
+      socket.emit('betSuccess');
+    } else {
+      socket.emit('betFailed');
+    }
+  });
+
 });
 
 server.listen(config.port, () => {

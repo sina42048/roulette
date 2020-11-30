@@ -1,0 +1,52 @@
+.bet-control {
+    display: flex;
+    position: relative;
+    width: 1150px;
+    max-width: 1150px;
+    height: 60px;
+    margin: 0 auto 30px auto;
+    box-shadow: 10px 10px 50px rgba(255, 0, 0, 0.2) inset;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 40px;
+}
+
+ul {
+    list-style: none;
+
+}
+
+li {
+    display: inline;
+    margin-right: 20px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+p {
+    padding: 0;
+    color: white;
+    font-weight: bold;
+}
+
+input[type='number'] {
+    border: none;
+    height: 70%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    width: 250px;
+}
+
+input[type='number']::placeholder {
+    color: #ccc;
+    opacity: 0.2;
+}
+
+@media only screen and (max-width: 1200px) {
+    .bet-control {
+        width: 800px;
+    }
+}

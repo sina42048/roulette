@@ -1,0 +1,14 @@
+<div class="bet">
+    <div class="bet-header">
+        <img class="bet-image" [ngStyle]="{'filter': imageColor}" src="../../../assets/red.png" alt="">
+        <button (click)="addNewBet()" [ngStyle]="{'background': buttonColor}">{{ betText }}</button>
+        <ul @list>
+            <li @list *ngFor="let bet of bets">
+                <div class="place-bet-holder">
+                    <div class="place-bet-name">{{ bet.name }}</div>
+                    <div class="place-bet-amount">{{ bet.amount }}</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

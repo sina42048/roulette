@@ -1,7 +1,9 @@
 /* eslint-disable linebreak-style */
-let rollTimer = 10;
-let rolledNumber = 0;
+const betLogic = require('./bet');
 
+let rollTimer = 15;
+let rolledNumber = 0;
+const latestRolls = [];
 
 const startGame = (io) => {
   setInterval(() => {
@@ -12,9 +14,12 @@ const startGame = (io) => {
       rolledNumber = Math.floor(Math.random() * 15);
       io.sockets.emit('roll', rolledNumber);
     }
-    if (rollTimer <= -8) {
+    if (rollTimer <= -12) {
+      latestRolls.push(rolledNumber);
+      io.sockets.emit('latestRolls', latestRolls.slice(Math.max(latestRolls.length - 8, 1)));
       io.sockets.emit('restart');
-      rollTimer = 10;
+      betLogic.resetBets();
+      rollTimer = 15;
     }
     rollTimer -= 1;
   }, 1000);
@@ -24,6 +29,10 @@ const getRollTimer = () => rollTimer;
 
 const getRolledNumber = () => rolledNumber;
 
+const getLatestRolls = () => latestRolls.slice(Math.max(latestRolls.length - 8, 1));
+
+
 module.exports.startGame = startGame;
 module.exports.getRollTimer = getRollTimer;
 module.exports.getRolledNumber = getRolledNumber;
+module.exports.getLatestRolls = getLatestRolls;

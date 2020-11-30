@@ -6,19 +6,22 @@
     background-image: url('../../../assets/cases.png');
     background-position-x: -176px;
     color: white;
-    margin: 40px auto 0 auto;
+    margin: 20px auto 0 auto;
 }
 
-.indicator {
-    position: absolute;
-    background-image: url('../../../assets/indicator.png');
-    width: 14px;
-    height: 100%;
+.roulette::before {
+    content: "";
     left: 50%;
     top: 50%;
+    width: 4px;
+    background-color: rgba(61, 6, 6, 0.5);
+    height: 100%;
+    position: absolute;
+    z-index: 2;
     transform: translate(-50%, -50%);
-    z-index: 3;
 }
+
+
 
 @media only screen and (max-width: 1200px) {
     .roulette {
@@ -29,6 +32,6 @@
 
 @media only screen and (min-width: 1200px) {
     .roulette {
-        background-position-x: -176px;
+        background-position-x: -175px;
     }
 }
