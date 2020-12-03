@@ -1,0 +1,49 @@
+<div class="sign-up">
+    <h1>Sign up</h1>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="form-control">
+            <label for="username" class="form-control-title">Username: </label>
+            <input class="form-control-input" name="username" formControlName="username" placeholder="Enter username" type="text">
+        </div>
+        <span class="help-block" *ngIf="signUpForm.get('username').invalid && signUpForm.get('username').touched && signUpForm.get('username').errors.required">
+            username field is required ! 
+        </span>
+        <span class="help-block" *ngIf="signUpForm.get('username').invalid && signUpForm.get('username').touched && signUpForm.get('username').errors.minlength">
+            username field must be 6 character at least ! 
+        </span>
+        <span class="help-block" *ngIf="signUpForm.get('username').invalid && signUpForm.get('username').touched && signUpForm.get('username').errors.pattern">
+            wrong username format   
+        </span>
+        <div class="form-control">
+            <label for="email" class="form-control-title">Email: </label>
+            <input class="form-control-input" name="email" formControlName="email" placeholder="Enter email" type="text">
+        </div>
+        <span class="help-block" *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched && signUpForm.get('email').errors.required">
+            email field is required ! 
+        </span>
+        <span class="help-block" *ngIf="signUpForm.get('email').invalid && signUpForm.get('email').touched && signUpForm.get('email').errors.email">
+            please enter valid email address ! 
+        </span>
+        <div class="form-control">
+            <label for="password" class="form-control-title">Password: </label>
+            <input class="form-control-input" name="password" formControlName="password" placeholder="Enter password" type="password">
+        </div>
+        <span class="help-block" *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched && signUpForm.get('password').errors.required">
+            password field is required ! 
+        </span>
+        <span class="help-block" *ngIf="signUpForm.get('password').invalid && signUpForm.get('password').touched && signUpForm.get('password').errors.minlength">
+            password length must be at least 6 character ! 
+        </span>
+        <div class="form-control">
+            <label for="cpassword" class="form-control-title">Confirm Password: </label>
+            <input class="form-control-input" name="cpassword" formControlName="cpassword" placeholder="Enter password" type="password">
+        </div>
+        <span class="help-block" *ngIf="signUpForm.get('cpassword').invalid && signUpForm.get('cpassword').touched && signUpForm.get('cpassword').errors.required">
+            confirm password field is required ! 
+        </span>
+        <span class="help-block" *ngIf="signUpForm.get('cpassword').invalid && signUpForm.get('cpassword').touched && !signUpForm.get('cpassword').errors.isMatching">
+            password not match ! 
+        </span>
+        <button type="submit" [disabled]="!signUpForm.valid || loading">{{ loading ? 'Please wait ...' : 'Sign Up Now !' }}</button>
+    </form>
+</div>

@@ -4,7 +4,7 @@
         <button (click)="addNewBet()" [ngStyle]="{'background': buttonColor}">{{ betText }}</button>
         <ul @list>
             <li @list *ngFor="let bet of bets">
-                <div class="place-bet-holder">
+                <div class="place-bet-holder" [@winnerState]="winnerStatus">
                     <div class="place-bet-name">{{ bet.name }}</div>
                     <div class="place-bet-amount">{{ bet.amount }}</div>
                 </div>

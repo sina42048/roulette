@@ -1,5 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SocketService } from 'src/app/socket.service';
 
@@ -21,18 +22,19 @@ interface LatestRolls {
     ])
   ]
 })
-export class LatestRollComponent implements OnInit {
-  rolls: Array<LatestRolls>;
+export class LatestRollComponent implements OnInit, OnDestroy {
+  rolls: LatestRolls[];
+  latestRolls$: Subscription;
 
 
   constructor(private socketService: SocketService) { }
 
   ngOnInit(): void {
-    this.socketService.fromEvent('latestRolls')
+    this.latestRolls$ = this.socketService.fromEvent('latestRolls')
     .pipe(
-      map((rolls: Array<number>) => {
+      map((rolls: number[]) => {
         const updatedRolls = [];
-        rolls.forEach((roll) => {
+        rolls.forEach((roll: number) => {
           let colorStyle = '';
           if (roll === 0) {
             colorStyle = 'hue-rotate(175deg)';
@@ -44,9 +46,13 @@ export class LatestRollComponent implements OnInit {
         return updatedRolls;
       })
     )
-    .subscribe((rolls: Array<LatestRolls>) => {
+    .subscribe((rolls: LatestRolls[]) => {
       this.rolls = rolls;
     });
+  }
+
+  ngOnDestroy() {
+    this.latestRolls$.unsubscribe();
   }
 
 }

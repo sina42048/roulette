@@ -27,3 +27,34 @@ p {
         width: 800px;
     }
 }
+
+@media only screen and (max-width: 820px) {
+    .latest-rolls {
+        width: 600px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .latest-rolls {
+        width: 400px;
+    }
+    img {
+        width: 40px;
+    }
+    p {
+        margin-right: 20px;
+        font-size: .7rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .latest-rolls {
+        width: 250px;
+    }
+    img {
+        width: 30px;
+    }
+    p {
+        display: none;
+    }
+}

@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
-
+import { Ng9OdometerModule } from 'ng9-odometer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,10 @@ import { TimerComponent } from './game/timer/timer.component';
 import { BetComponent } from './game/bet/bet.component';
 import { LatestRollComponent } from './game/latest-roll/latest-roll.component';
 import { BetControlComponent } from './game/bet-control/bet-control.component';
+import { AuthComponent } from './auth/auth.component';
+import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { ResetPasswordComponent } from './auth/sign-in/reset-password/reset-password.component';
 
 
 
@@ -29,13 +34,20 @@ import { BetControlComponent } from './game/bet-control/bet-control.component';
     BetComponent,
     LatestRollComponent,
     BetControlComponent,
+    AuthComponent,
+    SignUpComponent,
+    SignInComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    HttpClientModule,
+    Ng9OdometerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -25,9 +25,9 @@
     line-height: 60px;
 }
 
+
 .menu-item {
     display: inline;
-    padding: 0 60px;
     text-transform: uppercase;
 }
 
@@ -37,9 +37,37 @@
     color: #eee;
     font-size: 1.2rem;
     display: block;
+    height: 100%;
+    width: 100%;
 }
 
 .menu-item:hover {
     background: -webkit-linear-gradient(rgb(187, 83, 22), rgb(80, 6, 6));
     cursor: pointer;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+    display: inline;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+@media only screen and (max-width: 800px) {
+    .menu-item {
+        padding: 0 5px;
+    }
+    .menu-item a {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .menu-item {
+        padding: 0 5px;
+    }
+    .menu-item a {
+        font-size: .6rem;
+    }
 }

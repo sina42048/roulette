@@ -16,6 +16,14 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
     unique: true,
   },
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+  },
+  fund: {
+    type: Sequelize.INTEGER,
+    defaultValue: 50,
+  },
   password: {
     type: Sequelize.STRING,
   },

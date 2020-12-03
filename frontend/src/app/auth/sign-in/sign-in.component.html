@@ -1,0 +1,32 @@
+<div class="sign-in-container">
+    <div class="sign-in">
+        <h1>Sign in</h1>
+        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+            <div class="form-control">
+                <label for="username" class="form-control-title">Username: </label>
+                <input class="form-control-input" name="username" formControlName="username" placeholder="Enter username" type="text">
+            </div>
+            <span class="help-block" *ngIf="signInForm.get('username').invalid && signInForm.get('username').touched && signInForm.get('username').errors.required">
+                username field is required ! 
+            </span>
+            <span class="help-block" *ngIf="signInForm.get('username').invalid && signInForm.get('username').touched && signInForm.get('username').errors.minlength">
+                username field must be 6 character at least ! 
+            </span>
+            <span class="help-block" *ngIf="signInForm.get('username').invalid && signInForm.get('username').touched && signInForm.get('username').errors.pattern">
+                wrong username format   
+            </span>
+            <div class="form-control">
+                <label for="password" class="form-control-title">Password: </label>
+                <input class="form-control-input" name="password" formControlName="password" placeholder="Enter password" type="password">
+            </div>
+            <span class="help-block" *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched && signInForm.get('password').errors.required">
+                password field is required ! 
+            </span>
+            <span class="help-block" *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched && signInForm.get('password').errors.minlength">
+                password length must be at least 6 character ! 
+            </span>
+            <button type="submit" [disabled]="!signInForm.valid || loading">{{ loading ? 'Please wait ...' : 'Sign In !' }}</button>
+        </form>
+    </div>
+    <app-reset-password></app-reset-password>
+</div>

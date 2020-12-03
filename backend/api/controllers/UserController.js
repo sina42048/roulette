@@ -2,38 +2,51 @@
 const User = require('../models/User');
 const authService = require('../services/auth.service');
 const bcryptService = require('../services/bcrypt.service');
+const validator = require('validator');
 
 const UserController = () => {
   const register = async (req, res) => {
     const { body } = req;
 
-    if (body.password === body.password2) {
+    if (body.username && body.email && body.password && body.cpassword
+        && validator.equals(body.password, body.cpassword)
+        && validator.isAlphanumeric(body.username)
+        && validator.isEmail(body.email)
+        && validator.isLength(body.password, { min: 6 })) {
       try {
         const user = await User.create({
           email: body.email,
           password: body.password,
+          username: body.username,
         });
         const token = authService().issue({ id: user.id });
 
         return res.status(200).json({ token, user });
       } catch (err) {
         console.log(err);
-        return res.status(500).json({ msg: 'Internal server error' });
+        switch (err.errors[0].path) {
+          case 'email':
+            return res.status(400).json({ msg: 'Bad Request: Email Already taken !', code: 1 });
+          case 'username':
+            return res.status(400).json({ msg: 'Bad Request: Username Already taken !', code: 2 });
+          default:
+            return res.status(500).json({ msg: err.errno });
+        }
       }
     }
 
-    return res.status(400).json({ msg: 'Bad Request: Passwords don\'t match' });
+    return res.status(400).json({ msg: 'Bad Request: Validation Failed !', code: 3 });
   };
 
   const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (email && password) {
+    if (username && password) {
       try {
         const user = await User
           .findOne({
             where: {
-              email,
+              username,
             },
           });
 

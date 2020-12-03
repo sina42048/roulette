@@ -63,3 +63,30 @@ button {
     cursor: pointer;
     font-weight: bold;
 }
+
+@media only screen and (max-width: 800px) {
+    h1 {
+        font-size: 4rem;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    h1 {
+        font-size: 3rem;
+    }
+    button {
+        width: 200px;
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    h1 {
+        font-size: 2rem;
+    }
+    button {
+        width: 200px;
+        font-size: .9rem;
+        height: 2rem;
+    }
+}

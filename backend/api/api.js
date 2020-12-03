@@ -2,6 +2,7 @@
  * third party libraries
  */
 /* eslint-disable no-console */
+const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
 const helmet = require('helmet');
@@ -24,6 +25,7 @@ const betLogic = require('../game-logic/bet');
 const config = require('../config/');
 const dbService = require('./services/db.service');
 const auth = require('./policies/auth.policy');
+const authService = require('./services/auth.service');
 
 // environment: development, staging, testing, production
 const environment = process.env.NODE_ENV;
@@ -51,6 +53,7 @@ app.use(helmet({
 // parsing the request bodys
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '..', 'dist', 'roulette')));
 
 // secure your private routes with jwt authentication middleware
 app.all('/private/*', (req, res, next) => auth(req, res, next));
@@ -58,6 +61,10 @@ app.all('/private/*', (req, res, next) => auth(req, res, next));
 // fill routes for express application
 app.use('/public', mappedOpenRoutes);
 app.use('/private', mappedAuthRoutes);
+
+app.get('/*', async (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'roulette', 'index.html'));
+});
 
 gameLogic.startGame(io);
 
@@ -74,14 +81,17 @@ io.on('connection', (socket) => {
 
   socket.on('newBet', (data) => {
     if (gameLogic.getRollTimer() > 0) {
-      betLogic.addNewBet(data.name, data.amount, data.color);
-      io.sockets.emit('newBetAddedToAllUser', data);
-      socket.emit('betSuccess');
+      const { token, amount, color } = data;
+      authService().verify(token, (err, verifiedToken) => {
+        if (err) {
+          return socket.emit('userNotFound');
+        }
+        return betLogic.addNewBet(socket, verifiedToken, color, amount);
+      });
     } else {
       socket.emit('betFailed');
     }
   });
-
 });
 
 server.listen(config.port, () => {

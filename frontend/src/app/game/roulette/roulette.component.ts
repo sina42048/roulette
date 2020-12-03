@@ -30,14 +30,14 @@ export class RouletteComponent implements OnInit {
 
     this.initialRoulettePosition = parseInt(getComputedStyle(this.roullete.nativeElement).backgroundPositionX.replace('px', ''));
 
-    this.rollObservable$ = this.socketService.fromEvent('roll').subscribe((data: number) => {
+    this.rollObservable$ = this.socketService.fromEvent('roll').subscribe((rolledNumber: number) => {
       this.audio.play();
-      this.rouletteRoll(data, -12000, 9000);
+      this.rouletteRoll(rolledNumber, -12000, 9000);
     });
 
-    this.rollingObservable$ = this.socketService.fromEvent('rolling').subscribe((data: number) => {
+    this.rollingObservable$ = this.socketService.fromEvent('rolling').subscribe((rolledNumber: number) => {
       this.audio.play();
-      this.rouletteRoll(data, -1500, 100);
+      this.rouletteRoll(rolledNumber, -1500, 100);
     });
 
     this.restartRollObservable$ = this.socketService.fromEvent('restart').subscribe(() => {
@@ -55,15 +55,15 @@ export class RouletteComponent implements OnInit {
     this.animationRoulette.play();
   }
 
-  rouletteRoll(data: number, position: number, animTimer: number): void {
+  rouletteRoll(rolledNumber: number, position: number, animTimer: number): void {
     const layout = [1, 14, 2, 13, 3, 12, 4, 0, 11, 5, 10, 6, 9, 7, 8];
-    const rollIndex = layout.findIndex((number) => number === data);
+    const rollIndex = layout.findIndex((number) => number === rolledNumber);
     if (rollIndex > 7) {
-      this.currentPosition = position + this.initialRoulettePosition + ( rollIndex - 7 ) * -100 - this.randomNumber(-40, 40);
+      this.currentPosition = position + this.initialRoulettePosition + ( rollIndex - 7 ) * -100 - this.randomNumber(-49, 49);
     } else {
-      this.currentPosition = position + this.initialRoulettePosition + ( 7 + (rollIndex + 1) ) * -100 - this.randomNumber(-40, 40);
+      this.currentPosition = position + this.initialRoulettePosition + ( 7 + (rollIndex + 1) ) * -100 - this.randomNumber(-49, 49);
     }
-    console.log(data, ' | ', rollIndex, ' | ', this.currentPosition);
+    console.log(rolledNumber, ' | ', rollIndex, ' | ', this.currentPosition);
     this.updateRoulette(this.currentPosition, animTimer)
   }
 
@@ -72,16 +72,23 @@ export class RouletteComponent implements OnInit {
   }
 
   onResize($event: Event) {
-    if ( ( $event.target as any ).innerWidth < 1200 ) {
-      this.initialRoulettePosition = -350;
-    } else {
+    if ( ( $event.target as any ).innerWidth > 1200) {
       this.initialRoulettePosition = -175;
+    } else if ( ( $event.target as any ).innerWidth <= 1200 && ( $event.target as any ).innerWidth >= 800 ) {
+      this.initialRoulettePosition = -350;
+    } else if ( ( $event.target as any ).innerWidth < 800 && ( $event.target as any ).innerWidth >= 620) {
+      this.initialRoulettePosition = -450;
+    } else if ( ( $event.target as any ).innerWidth < 620 && ( $event.target as any ).innerWidth >= 400) {
+      this.initialRoulettePosition = -550;
+    }else {
+      this.initialRoulettePosition = -625;
     }
   }
 
   ngOnDestroy(): void {
     this.rollingObservable$.unsubscribe();
     this.rollObservable$.unsubscribe();
+    this.restartRollObservable$.unsubscribe();
   }
 
 }

@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.container > * {
+    z-index: 2;
+}
+
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../assets/roulette.jpg');
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(30%);
+    z-index: 1;
+    transition: filter 1s;
+}
+
+.bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+    width: 1150px;
+    max-width: 1150px;
+    color: white;
+    margin-top: 120px;
+}
+
+.indicator {
+    width: 2px;
+    height: 100%;
+    background-color: rgba(173, 23, 23, 0.5);
+}
+
+@media only screen and (max-width: 1200px) {
+    .auth-container {
+        width: 800px;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .auth-container {
+        width: 600px;
+    }
+    h1 {
+        color: red;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .auth-container {
+        flex-direction: column;
+        width: 400px;
+        height: auto;
+    }
+
+    .indicator {
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 420px) {
+    .auth-container {
+        flex-direction: column;
+        width: 250px;
+        height: auto;
+    }
+
+}

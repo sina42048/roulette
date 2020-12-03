@@ -50,3 +50,39 @@ input[type='number']::placeholder {
         width: 800px;
     }
 }
+
+@media only screen and (max-width: 820px) {
+    .bet-control {
+        width: 600px;
+    }
+    li {
+        font-size: .8rem;
+    }
+    p {
+        font-size: .8rem;
+    }
+    input[type='number'] {
+        width: 150px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .bet-control {
+        width: 400px;
+    }
+    ul {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .bet-control {
+        width: 250px;
+    }
+    ul {
+        display: none;
+    }
+    p {
+        display: none;
+    }
+}

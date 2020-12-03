@@ -1,0 +1,98 @@
+.sign-up {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 34rem;
+    box-shadow: 10px 10px 50px rgba(255, 0, 0, 0.2) inset;
+    border-radius: 40px 0 40px;
+    height: 100%;
+}
+
+.ng-invalid.ng-touched:not(form) {
+    border: 1px solid red;
+}
+
+.ng-valid:not(form) {
+    border: 1px solid green;
+}
+
+.help-block {
+    color: red;
+    display: block;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+button {
+    width: 100%;
+    border: none;
+    height: 3rem;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(rgb(17, 124, 3), rgb(26, 102, 7));
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: auto;
+    opacity: 0.5;
+}
+
+.form-control-title {
+    display: block;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.form-control-input {
+    border: none;
+    height: 3.5rem;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.form-control-input::placeholder {
+    color: #ccc;
+    opacity: 0.2;
+}
+
+.form-control-input::placeholder {
+    color: #ccc;
+    opacity: 0.2;
+}
+
+@media only screen and (max-width: 1200px) {
+    .sign-up {
+        width: 24rem;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .sign-up {
+        width: 18rem;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .sign-up {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    button {
+        font-size: .9rem;
+    }
+}

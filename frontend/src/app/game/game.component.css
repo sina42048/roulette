@@ -43,7 +43,6 @@
     position: relative;
     width: 1150px;
     max-width: 1150px;
-    height: 20rem;
     color: white;
     margin-top: 20px;
 }
@@ -52,5 +51,27 @@
 @media only screen and (max-width: 1200px) {
     .bets-container {
         width: 800px;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+    .bets-container {
+        width: 600px;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    .bets-container {
+        flex-direction: column;
+        width: 400px;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .bets-container {
+        flex-direction: column;
+        width: 250px;
+        height: auto;
     }
 }

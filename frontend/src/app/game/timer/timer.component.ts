@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SocketService } from 'src/app/socket.service';
 
@@ -7,18 +7,15 @@ import { SocketService } from 'src/app/socket.service';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css'],
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, OnDestroy {
   timer = 'Connecting...';
   testWidth = 100;
   rollTimer$: Subscription;
   restartRoll$: Subscription;
-  socketConnection$: Subscription;
 
   constructor(private socketService: SocketService) { }
 
   ngOnInit(): void {
-
-
     this.rollTimer$ = this.socketService.fromEvent('timer').subscribe((data: number) => {
       if (data === 0) {
         this.testWidth = 100;
@@ -33,5 +30,11 @@ export class TimerComponent implements OnInit {
       this.timer = 'Restarting Game...';
     });
   }
+
+  ngOnDestroy() {
+    this.rollTimer$.unsubscribe();
+    this.restartRoll$.unsubscribe();
+  }
+
 
 }
