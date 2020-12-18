@@ -7,6 +7,11 @@
     min-height: 60px;
     z-index: 9999;
     opacity: 0.7;
+    transition: opacity .5s;
+}
+
+.menu-disapear {
+    opacity: 0;
 }
 
 .container {
@@ -39,11 +44,6 @@
     display: block;
     height: 100%;
     width: 100%;
-}
-
-.menu-item:hover {
-    background: -webkit-linear-gradient(rgb(187, 83, 22), rgb(80, 6, 6));
-    cursor: pointer;
 }
 
 img {

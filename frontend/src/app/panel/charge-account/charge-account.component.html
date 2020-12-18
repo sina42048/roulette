@@ -1,0 +1,20 @@
+<div class="bg-image"></div>
+<div class="container">
+    <h1>Charge Account</h1>
+    <h3>How much you want to charge account</h3>
+    <div class="charge-container">
+        <form (ngSubmit)="onSubmit()" [formGroup]="chargeAccountForm">
+            <div class="form-control">
+                <label class="form-control-title" for="amount">Amount</label>
+                <input class="form-control-input" formControlName="amount" placeholder="enter amount" type="number" name="amount" min="6" required>
+            </div>
+            <span class="help-block" *ngIf="chargeAccountForm.get('amount').invalid && chargeAccountForm.get('amount').touched && chargeAccountForm.get('amount').errors.required">
+                amount is required ! 
+            </span>
+            <span class="help-block" *ngIf="chargeAccountForm.get('amount').invalid && chargeAccountForm.get('amount').touched && chargeAccountForm.get('amount').errors.min">
+                minimum charge amount is 5 ! 
+            </span>
+            <button [disabled]="!chargeAccountForm.valid">Charge Account</button>
+        </form>
+    </div>
+</div>

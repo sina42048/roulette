@@ -1,6 +1,5 @@
-import { animate, trigger, style, transition, state } from '@angular/animations';
+import { animate, trigger, style, transition, state, query, stagger } from '@angular/animations';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SocketService } from 'src/app/socket.service';
@@ -13,12 +12,15 @@ import { Bet } from '../models/bet';
   styleUrls: ['./bet.component.css'],
   animations: [
     trigger('list', [
-      transition(':enter', [
-        style({ transform: 'translateY(-20px)' }), animate('300ms', style({ transform: 'translateY(0)' }))]
-      ),
-      transition(':leave',
-        [style({ opacity: 1, transform: 'translateY(0px)' }), animate('300ms', style({ opacity: 0, transform: 'translateY(20px)' }))]
-      )
+      state('in', style({})),
+      transition('* => void', [
+        style({ height: '!', opacity: 1 }),
+        animate(200, style({ height: 0, opacity: 0 }))
+      ]),
+      transition('void => *', [
+        style({ height: 0, opacity: 0 }),
+        animate(400, style({ height: '*', opacity: 1 }))
+      ])
     ]),
     trigger('winnerState', [
       state('winner', style({ color: 'green' })),
@@ -32,6 +34,7 @@ export class BetComponent implements OnInit, OnDestroy {
   buttonColor: string;
   imageColor: string;
   bets = [];
+  totalBetAmount = 0;
   winnerStatus = 'normal';
   retriveAllBets$: Subscription;
   newBetAdded$: Subscription;
@@ -47,31 +50,38 @@ export class BetComponent implements OnInit, OnDestroy {
       .betService
       .retriveAllBets$
       .pipe(map((bets: Bet[]) => {
-        let colorFiltered : Bet[];
-        colorFiltered = bets.filter((bet: Bet) => bet.color == this.betColor);
+        const colorFiltered = bets.filter((bet: Bet) => bet.color == this.betColor);
         return colorFiltered;
       }))
       .subscribe((bets: Bet[]) => {
         this.bets = bets;
+        const totalBetAmount = bets.reduce((acc, cur) => acc + cur.amount ,0);
+        this.totalBetAmount = totalBetAmount;
       });
 
     this.newBetAdded$ = this.betService.newBetAdded$.subscribe((bet: Bet) => {
-      if (bet.color == this.betColor)
+      if (bet.color == this.betColor) {
         this.bets.push(bet);
-        this.bets.sort((a: Bet, b: Bet) => {
-          if (a.amount < b.amount) {
-            return 1;
-          } else if (a.amount > b.amount) {
-            return -1;
-          } else {
-            return 0;
-          }
-        });
+        this.totalBetAmount += bet.amount
+      }
+      this.bets.sort((a: Bet, b: Bet) => {
+        return a.amount < b.amount ? 1 : a.amount > b.amount ? -1 : 0;
+      });
     });
 
     this.winner$ = this.socketService.fromEvent('winner').subscribe((winnerColor: string) => {
       if (winnerColor == this.betColor) {
         this.winnerStatus = 'winner';
+        this.bets.forEach((bet: Bet) => {
+          if (bet.color == winnerColor) {
+            if (winnerColor == 'red' || winnerColor == 'black') {
+              return bet.amount *= 2;
+            }
+            return bet.amount *= 14;
+          }
+        });
+        const totalBetAmount = this.bets.reduce((acc, cur) => acc + cur.amount ,0);
+        this.totalBetAmount = totalBetAmount;
       } else {
         this.winnerStatus = 'loser';
       }
@@ -80,6 +90,7 @@ export class BetComponent implements OnInit, OnDestroy {
     this.restart$ = this.socketService.fromEvent('restart').subscribe(() => {
       this.bets = [];
       this.winnerStatus = 'normal';
+      this.totalBetAmount = 0;
     });
 
     if (this.betColor == 'red') {
@@ -95,7 +106,7 @@ export class BetComponent implements OnInit, OnDestroy {
   }
 
   addNewBet() {
-    this.betService.newBet('Sina', this.betColor);
+    this.betService.newBet(this.betColor);
   }
 
   ngOnDestroy() {

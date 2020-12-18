@@ -1,8 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/models/auth';
-import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-header',
@@ -15,19 +14,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isUserLoggedIn = false;
   userData: User;
   userUpdateFund$: Subscription;
+  menuClass = '';
 
   constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.loggedInUserData$.subscribe((userData: User) => {
       this.isUserLoggedIn = userData != null;
-      this.userData = userData;
+      this.userData = userData != null ? {...userData} : null;
     });
   }
 
   ngOnDestroy() {
     this.loggedInUserData$.unsubscribe();
     this.userUpdateFund$.unsubscribe();
+  }
+  
+  @HostListener('window:scroll', ['$event'])
+  onScroll($event) {
+    if (window.scrollY > 20) {
+      this.menuClass = 'menu-disapear';
+    } else {
+      this.menuClass = '';
+    }
   }
 
 }

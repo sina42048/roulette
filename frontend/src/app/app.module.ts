@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 import { ToastrModule } from 'ngx-toastr';
 import { Ng9OdometerModule } from 'ng9-odometer';
+import { TableModule } from 'ngx-easy-table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,12 @@ import { AuthComponent } from './auth/auth.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ResetPasswordComponent } from './auth/sign-in/reset-password/reset-password.component';
+import { ActivationComponent } from './auth/activation/activation.component';
+import { DashboardComponent } from './panel/dashboard/dashboard.component';
+import { ChangePasswordComponent } from './panel/change-password/change-password.component';
+import { ChargeAccountComponent } from './panel/charge-account/charge-account.component';
+import { BetHistoryComponent } from './panel/bet-history/bet-history.component';
+import { SupportComponent } from './panel/support/support.component';
 
 
 
@@ -38,6 +45,12 @@ import { ResetPasswordComponent } from './auth/sign-in/reset-password/reset-pass
     SignUpComponent,
     SignInComponent,
     ResetPasswordComponent,
+    ActivationComponent,
+    DashboardComponent,
+    ChangePasswordComponent,
+    ChargeAccountComponent,
+    BetHistoryComponent,
+    SupportComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +60,10 @@ import { ResetPasswordComponent } from './auth/sign-in/reset-password/reset-pass
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     HttpClientModule,
-    Ng9OdometerModule.forRoot()
+    Ng9OdometerModule.forRoot(),
+    TableModule
   ],
-  providers: [],
+  providers: [{ provide: Window, useValue: window }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

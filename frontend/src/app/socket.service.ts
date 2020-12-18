@@ -17,7 +17,7 @@ export class SocketService {
   eventObservables$: Record<string, Observable<any>> = {};
   ioSocket: any;
   config: SocketIoConfig = {
-      url: 'http://localhost:4000',
+      url: 'http://192.168.1.83:4000',
       options: {}
   };
 

@@ -4,7 +4,7 @@
     padding: 20px;
     width: 34rem;
     box-shadow: 10px 10px 50px rgba(255, 0, 0, 0.2) inset;
-    border-radius: 40px 0 40px;
+    border-radius: 5px 40px 5px 40px;
     height: 100%;
 }
 
@@ -68,6 +68,7 @@ button:disabled {
 .form-control-input::placeholder {
     color: #ccc;
     opacity: 0.2;
+    text-transform: uppercase;
 }
 
 .form-control-input::placeholder {

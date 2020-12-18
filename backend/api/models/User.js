@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const Bet = require('./Bet');
 const bcryptService = require('../services/bcrypt.service');
 
 const sequelize = require('../../config/database');
@@ -22,7 +23,17 @@ const User = sequelize.define('User', {
   },
   fund: {
     type: Sequelize.INTEGER,
-    defaultValue: 50,
+    defaultValue: 5,
+  },
+  jwtToken: {
+    type: Sequelize.STRING,
+  },
+  activationToken: {
+    type: Sequelize.STRING,
+  },
+  isActivated: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   password: {
     type: Sequelize.STRING,
@@ -34,8 +45,11 @@ User.prototype.toJSON = function () {
   const values = Object.assign({}, this.get());
 
   delete values.password;
+  delete values.jwtToken;
 
   return values;
 };
 
+User.hasMany(Bet);
+Bet.belongsTo(User);
 module.exports = User;

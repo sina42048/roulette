@@ -10,17 +10,16 @@
 }
 
 .roulette::before {
+    width: 4px;
+    background-color: rgba(197, 0, 0, 0.493);
     content: "";
     left: 50%;
     top: 50%;
-    width: 4px;
-    background-color: rgba(61, 6, 6, 0.5);
     height: 100%;
     position: absolute;
     z-index: 2;
     transform: translate(-50%, -50%);
 }
-
 
 @media only screen and (min-width: 1200px) {
     .roulette {

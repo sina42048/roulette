@@ -1,0 +1,89 @@
+h1 {
+    font-size: 6rem;
+    color:#ffffff;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(80, 6, 6));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/roulette.jpg');
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(30%);
+    z-index: 1;
+    transition: filter 1s;
+}
+
+.bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: red;
+}
+
+.container > * {
+    z-index: 2;
+}
+
+button {
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(80, 6, 6));
+    width: 25rem;
+    height: 4rem;
+    background-color: #940a0a;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-size: 2rem;
+    font-style: italic;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 800px) {
+    h1 {
+        font-size: 4rem;
+    }
+}
+
+@media only screen and (max-width: 620px) {
+    h1 {
+        font-size: 3rem;
+    }
+    button {
+        width: 200px;
+        font-size: .9rem;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    h1 {
+        font-size: 2rem;
+    }
+    button {
+        width: 200px;
+        font-size: .9rem;
+        height: 2rem;
+    }
+}

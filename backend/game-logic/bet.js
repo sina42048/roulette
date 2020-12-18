@@ -1,5 +1,7 @@
 /* eslint-disable linebreak-style */
 const User = require('../api/models/User');
+const Bet = require('../api/models/Bet');
+const rouletteLogic = require('./roulette');
 
 const bets = [];
 
@@ -7,7 +9,7 @@ const addnewBet = async (socket, verifiedToken, color, amount) => {
   const user = await User
     .findOne({
       where: {
-        id: verifiedToken.id,
+        jwtToken: verifiedToken.token,
       },
     });
 
@@ -15,6 +17,12 @@ const addnewBet = async (socket, verifiedToken, color, amount) => {
     return socket.emit('userNotFound');
   }
   if (user.fund >= amount) {
+    await Bet.create({
+      UserId: user.id,
+      amount,
+      color,
+      round: rouletteLogic.getRoundNumber(),
+    });
     await user.update({
       fund: user.fund - amount,
     });

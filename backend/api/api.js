@@ -1,7 +1,7 @@
+/* eslint-disable no-console */
 /**
  * third party libraries
  */
-/* eslint-disable no-console */
 const path = require('path');
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -11,7 +11,7 @@ const mapRoutes = require('express-routes-mapper');
 const cors = require('cors');
 const io = require('socket.io')(4000, {
   cors: {
-    origin: 'http://localhost:4200',
+    origin: 'http://192.168.1.83:4200', // should be change when upload to host
     credentials: true,
   },
   serveClient: true,
@@ -66,7 +66,15 @@ app.get('/*', async (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'dist', 'roulette', 'index.html'));
 });
 
+/**
+ * Game Logic to start roulette game
+ */
+
 gameLogic.startGame(io);
+
+/**
+ * Socket server
+ */
 
 io.on('connection', (socket) => {
   console.log('user connected');
@@ -75,6 +83,7 @@ io.on('connection', (socket) => {
     socket.emit('latestRolls', gameLogic.getLatestRolls());
     if (gameLogic.getRollTimer() <= 0) {
       socket.emit('timer', 0);
+      socket.emit('timerDiff', gameLogic.getRollTimer());
       socket.emit('rolling', gameLogic.getRolledNumber());
     }
   });
@@ -94,7 +103,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(config.port, () => {
+server.listen(config.port, '0.0.0.0', () => {
   if (environment !== 'production' &&
     environment !== 'development' &&
     environment !== 'testing'

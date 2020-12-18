@@ -9,7 +9,6 @@ interface LatestRolls {
   colorStyle: string;
 }
 
-
 @Component({
   selector: 'app-latest-roll',
   templateUrl: './latest-roll.component.html',
@@ -42,7 +41,7 @@ export class LatestRollComponent implements OnInit, OnDestroy {
             colorStyle = 'grayscale(100%)';
           }
           updatedRolls.push({ rolledNumber: roll, colorStyle });
-        })
+        });
         return updatedRolls;
       })
     )

@@ -1,0 +1,27 @@
+<div class="bg-image"></div>
+<div class="container">
+    <h1>Support Ticket</h1>
+    <h3>We are ready to respond at any time</h3>
+    <form (ngSubmit)="onSubmit()" [formGroup]="supportForm">
+        <div class="supportticket-container">
+            <div class="form-control">
+                <label class="form-control-title" for="title">Title</label>
+                <input class="form-control-input" formControlName="title" placeholder="enter title" type="text" name="title">
+            </div>
+            <span class="help-block" *ngIf="supportForm.get('title').invalid && supportForm.get('title').touched && supportForm.get('title').errors.required">
+                title is required ! 
+            </span>
+            <div class="form-control">
+                <label class="form-control-title" for="description">Description</label>
+                <textarea class="form-control-textarea" name="description" id="description" cols="30" rows="10" placeholder="description" formControlName="description"></textarea>
+            </div>
+            <span class="help-block" *ngIf="supportForm.get('description').invalid && supportForm.get('description').touched && supportForm.get('description').errors.required">
+                description is required !  
+            </span>
+            <span class="help-block" *ngIf="supportForm.get('description').invalid && supportForm.get('description').touched && supportForm.get('description').errors.minlength">
+                description should be at least 6 character ! 
+            </span>
+            <button [disabled]="!supportForm.valid || loading">Send Ticket</button>
+        </div>
+    </form>
+</div>

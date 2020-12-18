@@ -1,0 +1,147 @@
+h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(80, 6, 6));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 90px;
+}
+
+h3 {
+    color: wheat;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+h3::after {
+    content: ' 🤔'
+}
+
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/roulette.jpg');
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(30%);
+    z-index: 1;
+    transition: filter 1s;
+}
+
+.bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container > * {
+    z-index: 2;
+}
+
+.dashboard-container {
+    border-top: 1px solid #e56332;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, .4);
+    border-radius: 100px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 1150px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(80, 6, 6));
+    width: 200px;
+    height: 8rem;
+    background-color: #940a0a;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 2rem;
+    font-style: italic;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 20px;
+    text-transform: uppercase;
+    opacity: .7;
+    flex-grow: 1;
+}
+
+button:last-child {
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(250, 105, 8));
+    font-size: 2rem;
+}
+
+button:hover {
+    background: -webkit-linear-gradient(rgb(146, 31, 31), rgb(179, 87, 12));
+}
+
+@media only screen and (max-width: 1200px) {
+    .dashboard-container {
+        width: 800px;
+    }
+    button {
+        width: 320px;
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    h1 {
+        font-size: 4rem;
+    }
+    .dashboard-container {
+        width: 90%;
+    }
+    button {
+        width: 230px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 670px) {
+    h1 {
+        font-size: 3rem;
+    }
+    button {
+        width: 400px;
+        font-size: .9rem;
+    }
+    .dashboard-container {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .dashboard-container {
+        border-radius: 30px;
+    }
+    button {
+        width: 250px;
+        font-size: .9rem;
+        height: 5rem;
+    }
+}

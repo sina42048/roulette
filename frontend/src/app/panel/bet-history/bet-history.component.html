@@ -1,0 +1,16 @@
+<div class="bg-image"></div>
+<div class="container">
+    <h1>Bet's History</h1>
+    <h3>Last 10 bets</h3>
+    <form>
+        <div class="bethistory-container">
+            <div class="lds-roller" *ngIf="isLoading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <ngx-table *ngIf="data.length > 0 || !isLoading"
+                       [configuration]="configuration"
+                       [data]="data"
+                       [columns]="columns"
+                       [loadingTemplate]="loadingTemplate">
+            </ngx-table>
+        </div>
+    </form>
+</div>

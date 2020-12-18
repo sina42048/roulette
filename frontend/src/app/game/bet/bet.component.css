@@ -1,7 +1,6 @@
 .bet {
     position: relative;
     width: 22rem;
-    height: 200px;
     overflow: visible;
 }
 
@@ -10,7 +9,7 @@ button {
     border: none;
     height: 3rem;
     font-weight: bolder;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: white;
     border-radius: 10px;
 }
@@ -34,20 +33,31 @@ button:hover {
     transform: scale(1.1);
 }
 
-ul {
-    margin: 0;
+.bet-header:last-child {
+    margin-bottom: 40px;
+}
+
+.user-bet {
+    margin-top: 20px;
     padding: 0;
-    list-style-type: none;
+    list-style-type: lower-greek;
+    transition: all .5s;
 }
 
-li {
-    margin: 20px;
+.user-bet:first-child {
+    margin-top: 20px;
 }
 
-.place-bet-holder{
+.place-bet-holder {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(109, 27, 27, 0.651);
+    padding: 15px;
+    border-radius: 40px 10px;
+    font-weight: bolder;
+    font-size: .7rem;
+    margin-bottom: 15px;
 }
 
 .place-bet-name {
@@ -55,12 +65,45 @@ li {
 }
 
 .place-bet-amount {
-    font-size: .6rem;
+    font-size: .7rem;
+}
+
+.place-bet-holder img {
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+.users-bet {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(34, 32, 32, 0.5);
+    margin-top: 20px;
+}
+
+.users-bet {
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: bolder;
+    font-size: .8rem;
+}
+
+.users-bet img {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-left: 3px;
 }
 
 @media only screen and (max-width: 1200px) {
     .bet {
         width: 16rem;
+    }
+    button {
+        font-size: .9rem;
     }
 }
 
@@ -69,7 +112,10 @@ li {
         width: 12rem;
     }
     button {
-        font-size: .9rem;
+        font-size: .7rem;
+    }
+    .bet-image {
+        width: 40px;
     }
 }
 
@@ -78,6 +124,6 @@ li {
         width: 100%;
     }
     button {
-        font-size: .9rem;
+        font-size: 1rem;
     }
 }

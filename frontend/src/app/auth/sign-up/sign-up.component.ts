@@ -50,11 +50,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this
       .authService
       .register(username, email, password, cpassword)
-      .subscribe((data: RegisterResponse) => {
-        this.toastr.success('Congrats ! your account created successfully !', 'Sign up', {
+      .subscribe(() => {
+        this.toastr.success('your account created successfully , please check your email for activating account !', 'Sign up', {
           positionClass: 'toast-bottom-right',
         });
-        this.router.navigate(['/game']);
       });
   }
 

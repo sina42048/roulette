@@ -1,9 +1,9 @@
 <header>
-    <nav class="nav-menu">
+    <nav class="nav-menu" [ngClass]="menuClass">
         <div class="container">
             <ul class="menu">
                 <li *ngIf="!isUserLoggedIn" class="menu-item"><a routerLink="/auth" >Sign Up | Sign In</a></li>
-                <li *ngIf="userData" class="menu-item"><a routerLink="/">Welcome {{ userData.username }} | <ng9-odometer [number]="userData.fund"></ng9-odometer>$</a></li>
+                <li *ngIf="userData" class="menu-item"><a routerLink="/panel">{{ userData.username }} | Coin: <ng9-odometer [number]="userData.fund"></ng9-odometer><img src="../../assets/coin.png"  alt=""></a></li>
                 <li class="menu-item"><a routerLink="/game" >Game</a></li>
             </ul>
         </div>

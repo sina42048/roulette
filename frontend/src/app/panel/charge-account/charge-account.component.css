@@ -1,0 +1,187 @@
+h1 {
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(80, 6, 6));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 90px;
+}
+
+h3 {
+    color: wheat;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+h3::after {
+    content: ' 💳'
+}
+
+.bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../assets/roulette.jpg');
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(30%);
+    z-index: 1;
+    transition: filter 1s;
+}
+
+.bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container > * {
+    z-index: 2;
+}
+
+.charge-container {
+    border-top: 1px solid #e56332;
+    padding: 120px;
+    background-color: rgba(0, 0, 0, .4);
+    border-radius: 100px;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column ;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 1150px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(80, 6, 6));
+    width: 100%;
+    height: 5rem;
+    background-color: #940a0a;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 2rem;
+    font-style: italic;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    opacity: .7;
+    margin-top: 20px;
+}
+
+button:last-child {
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(250, 105, 8));
+}
+
+button:hover {
+    background: -webkit-linear-gradient(rgb(146, 31, 31), rgb(179, 87, 12));
+}
+
+button:disabled {
+    cursor: auto;
+    opacity: 0.5;
+}
+
+button:disabled:hover {
+    background: -webkit-linear-gradient(rgb(124, 14, 14), rgb(250, 105, 8));
+}
+
+.form-control-title {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1rem;
+    color: wheat;
+}
+
+.form-control-input {
+    border: none;
+    height: 3.5rem;
+    border-radius: 10px;
+    background-color: rgba(66, 9, 9, 0.5);
+    color: white;
+    text-align: center;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-control-input::placeholder {
+    color: #ccc;
+    opacity: 0.2;
+    text-transform: uppercase;
+}
+
+.ng-invalid.ng-touched:not(form) {
+    border: 1px solid red;
+}
+
+.ng-valid:not(form) {
+    border: 1px solid green;
+}
+
+.help-block {
+    color: red;
+    display: block;
+    margin-bottom: 15px;
+    margin-left: 5px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .charge-container {
+        width: 800px;
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    h1 {
+        font-size: 4rem;
+    }
+    .charge-container {
+        width: 600px;
+    }
+}
+
+@media only screen and (max-width: 660px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    .charge-container {
+        width: 90%;
+        padding: 60px;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    h1 {
+        font-size: 2rem;
+    }
+    h3 {
+        font-size: 1rem;
+    }
+    .charge-container {
+        padding: 40px;
+        border-radius: 30px;
+    }
+    button {
+        font-size: 1.1rem;
+    }
+}

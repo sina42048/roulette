@@ -8,6 +8,13 @@ const bcryptService = () => {
     return hash;
   };
 
+  const newPassword = (pass) => {
+    const salt = bcrypt.genSaltSync();
+    const hash = bcrypt.hashSync(pass, salt);
+
+    return hash;
+  };
+
   const comparePassword = (pw, hash) => (
     bcrypt.compareSync(pw, hash)
   );
@@ -15,6 +22,7 @@ const bcryptService = () => {
   return {
     password,
     comparePassword,
+    newPassword,
   };
 };
 

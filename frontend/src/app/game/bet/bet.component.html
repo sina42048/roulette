@@ -2,13 +2,15 @@
     <div class="bet-header">
         <img class="bet-image" [ngStyle]="{'filter': imageColor}" src="../../../assets/red.png" alt="">
         <button (click)="addNewBet()" [ngStyle]="{'background': buttonColor}">{{ betText }}</button>
-        <ul @list>
-            <li @list *ngFor="let bet of bets">
-                <div class="place-bet-holder" [@winnerState]="winnerStatus">
-                    <div class="place-bet-name">{{ bet.name }}</div>
-                    <div class="place-bet-amount">{{ bet.amount }}</div>
-                </div>
-            </li>
-        </ul>
+        <div class="users-bet">
+            <div class="bets-count"><ng9-odometer [number]="bets.length"></ng9-odometer> Total bets</div>
+            <div class="bets-amount" [ngStyle]="{'color': this.winnerStatus == 'winner' && this.bets.length ? 'green' : this.winnerStatus == 'loser' && this.bets.length  ? 'red' : ''}">{{ this.winnerStatus == 'winner' && this.bets.length ? '+' : this.winnerStatus == 'loser' && this.bets.length  ? '-' : '' }} <ng9-odometer [number]="totalBetAmount"></ng9-odometer> <img src="../../../assets/coin.png" alt=""></div>
+        </div>
+        <div class="user-bet" @list *ngFor="let bet of bets">
+            <div class="place-bet-holder" [@winnerState]="winnerStatus">
+                <div class="place-bet-name">{{ bet.name }}</div>
+                <div class="place-bet-amount">{{ this.winnerStatus == 'winner' ? '+' : this.winnerStatus == 'loser' ? '-' : '' }} <ng9-odometer [number]="bet.amount"></ng9-odometer><img src="../../../assets/coin.png" alt=""></div>
+            </div>
+        </div>
     </div>
 </div>

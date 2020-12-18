@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.2.0",
+    "@angular/cdk": "^11.0.2",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
     "@angular/core": "~10.2.0",
@@ -21,6 +22,7 @@
     "@angular/router": "~10.2.0",
     "@types/socket.io-client": "^1.4.34",
     "ng9-odometer": "^2.1.0",
+    "ngx-easy-table": "^14.0.0",
     "ngx-toastr": "^13.1.0",
     "rxjs": "~6.6.0",
     "socket.io-client": "^3.0.3",

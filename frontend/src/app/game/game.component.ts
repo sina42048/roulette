@@ -61,6 +61,7 @@ export class GameComponent implements OnInit, OnDestroy {
         positionClass: 'toast-bottom-right',
         easeTime: 1000
       });
+      this.auth.loggedInUserData$.next(null);
     });
 
     this.insufficientFund$ = this.socketService.fromEvent('insufficientFund').subscribe(() => {

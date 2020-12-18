@@ -3,9 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
-import { RegisterResponse, User } from '../models/auth';
+import { RegisterResponse } from '../models/auth';
 
 @Component({
   selector: 'app-sign-in',
@@ -23,7 +22,6 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loading$ = this.auth.loading$.subscribe((isLoading) => {
-      console.log(isLoading);
       this.loading = isLoading;
     });
 
@@ -36,7 +34,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   onSubmit() {
     const { username, password } = this.signInForm.value;
     this.auth.login(username, password).subscribe((userData: RegisterResponse) => {
-      this.toastr.success(`Welcome dear ${userData.user.username} !`, 'Sign in', {
+      this.toastr.success(`Welcome dear ${ userData.user.username } !`, 'Sign in', {
         positionClass: 'toast-bottom-right',
       });
       this.router.navigate(['/game']);
