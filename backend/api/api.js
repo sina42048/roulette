@@ -11,7 +11,7 @@ const mapRoutes = require('express-routes-mapper');
 const cors = require('cors');
 const io = require('socket.io')(4000, {
   cors: {
-    origin: 'http://192.168.1.83:4200', // should be change when upload to host
+    origin: 'http://192.168.1.83:2017', // should be change when upload to host
     credentials: true,
   },
   serveClient: true,

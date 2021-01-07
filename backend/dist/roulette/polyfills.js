@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Lion\Desktop\roulette\frontend\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\Lion\Desktop\desktop\roulette\frontend\src\polyfills.ts */"hN/g");
 
 
 /***/ }),
